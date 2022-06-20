@@ -18,6 +18,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { User } from "../../redux/types/types";
 import { isEmpty } from "lodash";
+import { fetchBuildings } from "../../redux/features/buildings/buildingsSlice";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -46,10 +47,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const redirect = location.search
-    ? // eslint-disable-next-line no-restricted-globals
-      location.search.split("redirect=")[1]
-    : "";
+  const redirect = location.search ? location.search.split("redirect=")[1] : "";
 
   const { user, profile, error } = useAppSelector((state) => state.user);
 
@@ -61,6 +59,7 @@ function Login() {
 
   useEffect(() => {
     if (isEmpty(profile) === false) {
+      dispatch(fetchBuildings());
       navigate(`/profile${redirect}`);
     }
   }, [redirect, navigate, profile]);

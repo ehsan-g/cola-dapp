@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { publicApi } from "../../apis/base";
-import { AxiosConfig, LoginState, User } from "../../types/types";
+import { AxiosConfig, Building, LoginState, User } from "../../types/types";
 
 const userJson = localStorage.getItem("userInfo");
 const userInfo = userJson !== null ? JSON.parse(userJson) : null;
@@ -41,7 +41,7 @@ export const login = createAsyncThunk("login", async (values: LoginState) => {
 });
 
 const userSlice = createSlice({
-  name: "buildings",
+  name: "users",
   initialState,
   reducers: {
     logOut: (state) => {

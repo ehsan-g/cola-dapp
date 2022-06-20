@@ -1,13 +1,5 @@
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import {
   changeMode,
   changeTheme,
@@ -17,8 +9,7 @@ import ExAlert from "../components/settings/Alert";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ThemeType } from "../redux/types/types";
-import KeyIcon from "@mui/icons-material/Key";
-import { logOut } from "../redux/features/auth/userSlice";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
@@ -33,19 +24,12 @@ export default function Settings() {
 
   const handleThemeChange = () => {
     if (!customize) return;
-    dispatch(changeTheme(1));
+    dispatch(changeTheme(profile?.company));
   };
 
   return (
-    <Grid
-      container
-      // direction="column"
-      // justifyContent="center"
-      // alignItems="flex-end"
-      sx={{ mt: 6, width: "100%" }}
-      spacing={2}
-    >
-      <Grid item>
+    <Grid container sx={{ mt: 6, width: "100%" }} spacing={2}>
+      <Grid item xs={6}>
         <Box
           sx={{
             display: "flex",
@@ -53,10 +37,11 @@ export default function Settings() {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: 1,
+            fontSize: "9px",
           }}
         >
           {customize.activeMode} mode
-          <IconButton sx={{ ml: 1 }} onClick={handleModeChange} color="inherit">
+          <IconButton onClick={handleModeChange} color="inherit">
             {customize.activeMode === "dark" ? (
               <Brightness7Icon />
             ) : (
@@ -65,7 +50,7 @@ export default function Settings() {
           </IconButton>
         </Box>
       </Grid>
-      <Grid item>
+      <Grid item xs={6}>
         <Box
           sx={{
             display: "flex",
@@ -73,6 +58,7 @@ export default function Settings() {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: 1,
+            fontSize: "8px",
           }}
         >
           {customize.activeTheme}
@@ -82,9 +68,9 @@ export default function Settings() {
             color="inherit"
           >
             {customize.activeTheme === ThemeType.PEPSI ? (
-              <Brightness7Icon />
+              <ApartmentIcon color="secondary" />
             ) : (
-              <Brightness4Icon />
+              <ApartmentIcon color="primary" />
             )}
           </IconButton>
         </Box>

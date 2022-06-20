@@ -17,7 +17,7 @@ export default function Buildings() {
     if (buildingStatus !== "succeeded" && profile) {
       dispatch(fetchBuildings());
     }
-  }, [profile]);
+  }, [profile, dispatch]);
 
   return (
     <>

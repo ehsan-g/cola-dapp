@@ -72,8 +72,9 @@ export default function Profile() {
                 <KeyIcon />
               </Grid>
               <Typography
+                color="text.primary"
                 component="span"
-                sx={{ margin: "auto", color: "white" }}
+                sx={{ margin: "auto" }}
               >
                 {profile &&
                   (profile?.company === 0
