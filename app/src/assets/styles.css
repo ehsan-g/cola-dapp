@@ -1,0 +1,8 @@
+/* to disable toggle on room */
+.dxm-control-bar{
+    display:none
+}
+.dxm-background{
+    fill: transparent;
+    stroke-width: 0;
+}
