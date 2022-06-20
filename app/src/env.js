@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-const env = process.env.ENVIRONMENT || "local";
+const env = process.env.REACT_APP_ENVIRONMENT || "local";
 
 let envApiUrl = "";
 

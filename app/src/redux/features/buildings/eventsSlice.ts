@@ -47,11 +47,14 @@ export const joinEvent = createAsyncThunk(
     const config: AxiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo.access}`,
       },
     };
+    console.log("userInfo.token");
+    console.log(userInfo.token);
     const response = await publicApi.put(
       `events/register/${eventId}/${userInfo.id}`,
+      {},
       config
     );
     return response.data;
@@ -68,9 +71,10 @@ export const leaveEvent = createAsyncThunk(
     const config: AxiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo.access}`,
       },
     };
+
     const response = await publicApi.delete(
       `events/register/${eventId}/${userInfo.id}`,
       config

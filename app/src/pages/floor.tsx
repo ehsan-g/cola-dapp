@@ -35,7 +35,6 @@ export default function Floors() {
   );
 
   const { events } = useAppSelector((state) => state.events);
-
   // coordinates
   useEffect(() => {
     if (buildingStatus === "succeeded") {
@@ -107,6 +106,7 @@ export default function Floors() {
       dispatch(fetchEvents(target.attribute("id")));
     }
   };
+  console.log(buildingData);
 
   return (
     <Grid container direction="column">

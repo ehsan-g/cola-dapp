@@ -5,7 +5,7 @@ export interface ThemeConfig {
 export interface AxiosConfig {
   headers: {
     "Content-Type": "application/json";
-    Authorization: any;
+    Authorization?: string;
   };
 }
 export enum Company {
