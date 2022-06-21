@@ -20,7 +20,6 @@ export const custumizerSlice = createSlice({
   reducers: {
     changeTheme: (state, action) => {
       let theme;
-      console.log(theme);
 
       if (action.payload === 2) {
         theme = ThemeType.COKE;
@@ -33,7 +32,6 @@ export const custumizerSlice = createSlice({
           theme = ThemeType.COKE;
         }
       }
-      console.log(theme);
 
       state.activeTheme = theme;
     },

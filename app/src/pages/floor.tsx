@@ -2,7 +2,7 @@ import "../assets/styles.css";
 import VectorMap, { Layer, Tooltip, Label } from "devextreme-react/vector-map";
 import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import type { RootState } from "../redux/app/store";
-import { ThemeType } from "../redux/types/types";
+import { Building, Floor, ThemeType } from "../redux/types/types";
 import { useEffect, useState } from "react";
 import { fetchEvents } from "../redux/features/buildings/eventsSlice";
 import EventAccordion from "../components/events/EventAccordion";
@@ -67,12 +67,20 @@ export default function Floors() {
     let list = [];
 
     if (roomsCord && buildingStatus === "succeeded") {
-      let theBuilding: any = buildings[1];
-      console.log(theBuilding);
-      console.log(theBuilding.floors);
-      console.log(theBuilding.floors[0].rooms);
+      const bIndex = buildings.findIndex((building: Building) => {
+        return building.id === parseInt(buildingId || "0");
+      });
 
-      let rooms = theBuilding.floors[0].rooms;
+      const theBuilding: any = buildings[bIndex];
+
+      const floors = theBuilding.floors;
+      const fIndex = floors.findIndex((floor: Floor) => {
+        return floor.id === parseInt(floorId || "0");
+      });
+
+      const theFloor: any = floors[fIndex];
+
+      let rooms = theFloor.rooms;
       if (roomsCord[0]) {
         for (let i = 0; i < rooms.length; i++) {
           let dic = {
@@ -90,7 +98,6 @@ export default function Floors() {
           list.push(dic);
         }
       }
-
       setRoomsList(list);
     }
   }, [roomsCord, buildingStatus]);

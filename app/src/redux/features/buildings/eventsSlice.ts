@@ -50,8 +50,6 @@ export const joinEvent = createAsyncThunk(
         Authorization: `Bearer ${userInfo.access}`,
       },
     };
-    console.log("userInfo.token");
-    console.log(userInfo.token);
     const response = await publicApi.put(
       `events/register/${eventId}/${userInfo.id}`,
       {},
