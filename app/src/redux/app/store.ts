@@ -7,6 +7,8 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import buildingsReducer from "../features/buildings/buildingsSlice";
 import userReducer from "../features/auth/userSlice";
 import eventReducer from "../features/buildings/eventsSlice";
+import lazyReducer from "../features/lazyFactory";
+import signReducer from "../features/lazyFactory";
 
 const sentryReduxEnhancer = Sentry.createReduxEnhancer({
   actionTransformer: (action) => {
@@ -30,6 +32,8 @@ const reducer = {
   user: userReducer,
   buildings: buildingsReducer,
   events: eventReducer,
+  Contracts: lazyReducer,
+  Signature: signReducer,
 };
 
 export const store = configureStore({

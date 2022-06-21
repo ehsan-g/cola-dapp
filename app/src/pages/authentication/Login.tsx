@@ -19,6 +19,11 @@ import { useEffect } from "react";
 import { User } from "../../redux/types/types";
 import { isEmpty } from "lodash";
 import { fetchBuildings } from "../../redux/features/buildings/buildingsSlice";
+import {
+  deployLazyContract,
+  signTransaction,
+} from "../../redux/features/lazyFactory";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -50,6 +55,11 @@ function Login() {
   const redirect = location.search ? location.search.split("redirect=")[1] : "";
 
   const { user, profile, error } = useAppSelector((state) => state.user);
+  const {
+    result,
+    status: statusDeploy,
+    error: errorDeploy,
+  } = useAppSelector((state) => state.Contracts);
 
   useEffect(() => {
     if (profile !== ({} as User)) {
@@ -153,11 +163,31 @@ function Login() {
             <Typography> OR </Typography>
           </Divider>
           <Grid container direction="column" alignItems="center">
-            <Grid item xs={12} sx={{ width: "100%" }}>
-              <Button variant="outlined" sx={{ width: "100%" }}>
-                Connect Wallet
-              </Button>
-            </Grid>
+            {!result ? (
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <LoadingButton
+                  loading={true && statusDeploy === "loading"}
+                  onClick={() => dispatch(deployLazyContract())}
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                >
+                  Deploy
+                </LoadingButton>
+              </Grid>
+            ) : (
+              <Grid item xs={12} sx={{ width: "100%" }}>
+                <LoadingButton
+                  onClick={() =>
+                    dispatch(signTransaction(result.contractAddress))
+                  }
+                  variant="contained"
+                  sx={{ width: "100%" }}
+                >
+                  Sign Transaction
+                </LoadingButton>
+              </Grid>
+            )}
+
             <Grid item xs={12} sx={{ marginTop: 6 }}>
               <Typography>
                 Don&apos;t have an account? <Link to="/register">Register</Link>
